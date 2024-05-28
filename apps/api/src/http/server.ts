@@ -1,4 +1,5 @@
 import fastifyCors from '@fastify/cors'
+import fastifyJwt from '@fastify/jwt'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import { fastify } from 'fastify'
@@ -10,11 +11,14 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { routes } from './routes'
+import { errorHandler } from './routes/error-handler'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
+
+app.setErrorHandler(errorHandler)
 
 app.register(fastifySwagger, {
   openapi: {
@@ -27,7 +31,7 @@ app.register(fastifySwagger, {
   },
   transform: jsonSchemaTransform,
 })
-
+app.register(fastifyJwt, { secret: 'my-jwt-secret' })
 app.register(fastifySwaggerUI, {
   routePrefix: '/docs',
 })
