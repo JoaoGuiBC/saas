@@ -16,11 +16,14 @@ import { errorHandler } from './routes/error-handler'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
+/** Set type provider */
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
+/** Set custom error handler */
 app.setErrorHandler(errorHandler)
 
+/** Set Swagger config and interface */
 app.register(fastifySwagger, {
   openapi: {
     info: {
@@ -43,8 +46,12 @@ app.register(fastifySwagger, {
 app.register(fastifySwaggerUI, {
   routePrefix: '/docs',
 })
+
+/** Set others fastify plugins */
 app.register(fastifyJwt, { secret: env.JWT_SECRET })
 app.register(fastifyCors)
+
+/** Connect API routes */
 app.register(routes)
 
 app
