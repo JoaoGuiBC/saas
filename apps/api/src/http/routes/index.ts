@@ -13,8 +13,13 @@ import { listOrganizations } from './orgs/list-organizations'
 import { shutdownOrganization } from './orgs/shutdown-organization'
 import { tranferOrganization } from './orgs/transfer-organization'
 import { updateOrganization } from './orgs/update-organization'
+import { createProject } from './projects/create-project'
+import { deleteProject } from './projects/delete-project'
+import { listProjects } from './projects/list-projects'
+import { updateProject } from './projects/update-project'
 
 export async function routes(app: FastifyInstance) {
+  /** Auth related routes */
   app.register(authenticateWithGithub)
   app.register(authenticateWithPassword)
   app.register(createAccount)
@@ -22,6 +27,7 @@ export async function routes(app: FastifyInstance) {
   app.register(requestPasswordRecover)
   app.register(resetPassword)
 
+  /** Organizations related routes */
   app.register(createOrganization)
   app.register(getUserMembership)
   app.register(getOrganization)
@@ -29,4 +35,10 @@ export async function routes(app: FastifyInstance) {
   app.register(shutdownOrganization)
   app.register(tranferOrganization)
   app.register(updateOrganization)
+
+  /** Projects related routes */
+  app.register(createProject)
+  app.register(deleteProject)
+  app.register(listProjects)
+  app.register(updateProject)
 }
