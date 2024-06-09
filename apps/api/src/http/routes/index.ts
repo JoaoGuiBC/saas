@@ -13,6 +13,9 @@ import { listInvites } from './invites/list-invites'
 import { listPendingInvites } from './invites/list-pending-invites'
 import { rejectInvite } from './invites/reject-invite'
 import { revokeInvite } from './invites/revoke-invite'
+import { listMembers } from './members/list-members'
+import { removeMember } from './members/remove-member'
+import { updateMember } from './members/update-member'
 import { createOrganization } from './orgs/create-organization'
 import { getUserMembership } from './orgs/get-membership'
 import { getOrganization } from './orgs/get-organization'
@@ -34,6 +37,20 @@ export async function routes(app: FastifyInstance) {
   app.register(requestPasswordRecover)
   app.register(resetPassword)
 
+  /** Invites related routes */
+  app.register(acceptInvite)
+  app.register(createInvite)
+  app.register(getInvite)
+  app.register(listInvites)
+  app.register(listPendingInvites)
+  app.register(rejectInvite)
+  app.register(revokeInvite)
+
+  /** Members related routes */
+  app.register(listMembers)
+  app.register(removeMember)
+  app.register(updateMember)
+
   /** Organizations related routes */
   app.register(createOrganization)
   app.register(getUserMembership)
@@ -48,13 +65,4 @@ export async function routes(app: FastifyInstance) {
   app.register(deleteProject)
   app.register(listProjects)
   app.register(updateProject)
-
-  /** Invites related routes */
-  app.register(acceptInvite)
-  app.register(createInvite)
-  app.register(getInvite)
-  app.register(listInvites)
-  app.register(listPendingInvites)
-  app.register(rejectInvite)
-  app.register(revokeInvite)
 }
