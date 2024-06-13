@@ -12,7 +12,7 @@ const routeSchema = {
   security: [{ bearerAuth: [] }],
   response: {
     200: z.object({
-      organization: z.array(
+      organizations: z.array(
         z.object({
           id: z.string().uuid(),
           name: z.string(),
@@ -29,7 +29,7 @@ export async function listOrganizations(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
-    .post('/organizations/:slug', { schema: routeSchema }, async (request) => {
+    .get('/organizations', { schema: routeSchema }, async (request) => {
       const userId = await request.getCurrentUserId()
 
       const organizations = await prisma.organization.findMany({
@@ -47,6 +47,6 @@ export async function listOrganizations(app: FastifyInstance) {
         ({ members, ...org }) => ({ ...org, role: members[0].role }),
       )
 
-      return { organization: organizationsWithUserRole }
+      return { organizations: organizationsWithUserRole }
     })
 }
