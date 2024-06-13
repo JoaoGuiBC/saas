@@ -15,16 +15,16 @@ import {
 export function OrganizationSwitcher() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex w-[168px] items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
-        <span className="text-muted-foreground">Selecione uma organização</span>
-        <ChevronsUpDown className="ml-auto size-4 text-muted-foreground" />
+      <DropdownMenuTrigger className="flex items-center gap-2 rounded p-1 text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        <span className="text-muted-foreground">Selecionar organização</span>
+        <ChevronsUpDown className="ml-1 size-4 text-muted-foreground" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        align="end"
+        align="center"
         alignOffset={-16}
         sideOffset={12}
-        className="w=[200px]"
+        className="w-[200px]"
       >
         <DropdownMenuGroup>
           <DropdownMenuLabel>Organizações</DropdownMenuLabel>

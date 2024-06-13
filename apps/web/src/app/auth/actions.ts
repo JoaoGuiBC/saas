@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import { env } from '@saas/env'
 import { redirect } from 'next/navigation'

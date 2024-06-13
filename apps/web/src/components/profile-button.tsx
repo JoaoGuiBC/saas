@@ -11,7 +11,11 @@ import {
 } from './ui/dropdown-menu'
 
 function getNameInitials(name: string): string {
-  const initials = name.split(' ').slice(0, 2).join('').toUpperCase()
+  const initials = name
+    .split(' ')
+    .map((initial) => initial.charAt(0))
+    .slice(0, 2)
+    .join('')
 
   return initials
 }
