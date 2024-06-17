@@ -15,9 +15,10 @@ const routeSchema = {
   response: {
     202: z.object({
       membership: z.object({
-        id: z.string(),
+        id: z.string().uuid(),
+        userId: z.string().uuid(),
         role: roleSchema,
-        organizationId: z.string(),
+        organizationId: z.string().uuid(),
       }),
     }),
   },
@@ -34,10 +35,10 @@ export async function getUserMembership(app: FastifyInstance) {
         const { slug } = request.params
 
         const {
-          membership: { id, role, organizationId },
+          membership: { id, role, organizationId, userId },
         } = await request.getUserMembership(slug)
 
-        return { membership: { id, role, organizationId } }
+        return { membership: { id, userId, role, organizationId } }
       },
     )
 }
