@@ -14,11 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt" suppressHydrationWarning>
+      <head />
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
           disableTransitionOnChange
+          defaultTheme="dark"
         >
           {children}
         </ThemeProvider>
